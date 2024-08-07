@@ -35,14 +35,7 @@ export const styles = StyleSheet.create({
     textAlign: 'center',
     position: 'absolute',
   },
-  lottie: {
-    height: 50,
-    width: 50,
-    position: 'absolute', // Posiciona o Lottie em relação ao contêiner pai
-    left: 30,
-    marginRight: '10%',
-    transform: [{ translateY: -15 }], // Ajusta para o centro verticalmente (metade da altura do Lottie)
-  },
+
   winner: {
     fontSize: 18,
     fontWeight: 'bold',
@@ -55,7 +48,7 @@ export const styles = StyleSheet.create({
     fontSize: 16,
     lineHeight: 24,
     color: '#666',
-    marginTop: 50,
+    marginTop: 5,
   },
   gameContainer: {
     backgroundColor: '#fff',

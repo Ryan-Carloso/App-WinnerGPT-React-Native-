@@ -4,6 +4,7 @@ import { styles as globalStyles } from '../styles/GlobalStyles'; // Renomeando p
 import { parseISO, isPast } from 'date-fns';
 import LottieView from 'lottie-react-native';
 import { styles } from '../styles/GameItem';
+import LottieAnimation from './LottieAnimation'
 
 
 // Função auxiliar para verificar se a data já passou
@@ -28,13 +29,7 @@ const GameItem = ({ item, numColumns }) => {
       <View style={styles.centeredWrapper}>
 
         <Text style={styles.winnerteam}>{item.winnerteam}</Text>
-        <LottieView
-          source={item.winnerteam === 'Draw' ? require('../assets/draw.json') : require('../assets/winner.json')}
-          autoPlay
-          loop
-          style={styles.lottie}
-        />
-
+        <LottieAnimation/>
       </View>
     </View>
     <Text style={styles.analysis}>{item.analysis}</Text>
