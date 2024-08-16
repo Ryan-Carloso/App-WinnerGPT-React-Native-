@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Text, StyleSheet, ScrollView, Linking, TouchableOpacity } from 'react-native';
 import { AntDesign, FontAwesome5 } from '@expo/vector-icons';
-import { styles } from '../styles/GlobalStyles';
+import { styles } from '../../styles/GlobalStyles';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 

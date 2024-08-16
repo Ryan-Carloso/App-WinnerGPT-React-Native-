@@ -1,11 +1,10 @@
 import React from 'react';
-import { View, Text } from 'react-native';
+import { View, Text, TouchableOpacity } from 'react-native';
+import { useRouter } from 'expo-router';
 import { styles as globalStyles } from '../styles/GlobalStyles'; // Renomeando para globalStyles
 import { parseISO, isPast } from 'date-fns';
-import LottieView from 'lottie-react-native';
 import { styles } from '../styles/GameItem';
-import LottieAnimation from './LottieAnimation'
-
+import LottieAnimation from './LottieAnimation';
 
 // Função auxiliar para verificar se a data já passou
 const isDatePast = (dateString) => {
@@ -14,28 +13,43 @@ const isDatePast = (dateString) => {
 };
 
 const GameItem = ({ item, numColumns }) => {
+  const router = useRouter();
 
+  const homeTeam = item.home_team_name;
+  const awayTeam = item.away_team_name;
+  const prediction = item.gpt_prediction;
+  const analysis = item.gpt_reason;
+  const date = item.fixture_date.slice(0, 10); // Extrair a data no formato AAAA-MM-DD
+  const time = item.fixture_date.slice(11, 16); // Extrair a hora no formato HH:MM
+
+  // Função para lidar com o clique no time
+  const handlePressTeam = (gameData) => {
+    router.push({
+      pathname: `/team/${gameData.home_team_id}`,
+      params: { gameData: JSON.stringify(gameData) }, // Passando os dados do jogo
+    });
+  };
 
   return (
-  <View style={[styles.gameContainer, { flexBasis: `${100 / numColumns}%` }]}>
-    <Text style={globalStyles.title}>{item.game}</Text>
-    <View style={styles.dateContainer}>
-      <Text style={styles.date}>{item.date}</Text>
-      <Text style={styles.time}>{item.time ? item.time.slice(0, 5) : ''}</Text>
-    </View>
-    <View style={styles.gameColumn}>
-      <Text style={styles.winner}>Forecasted by AI:</Text>
+    <TouchableOpacity onPress={() => handlePressTeam(item)}>
+    <View style={[styles.gameContainer, { flexBasis: `${100 / numColumns}%` }]}>
+      <Text style={globalStyles.title}>{homeTeam} vs {awayTeam}</Text>
       
-      <View style={styles.centeredWrapper}>
-
-        <Text style={styles.winnerteam}>{item.winnerteam}</Text>
-        <LottieAnimation/>
+      <View style={styles.dateContainer}>
+        <Text style={styles.date}>{date}</Text>
+        <Text style={styles.time}>{time}</Text>
       </View>
+      <View style={styles.gameColumn}>
+        <Text style={styles.winner}>Forecasted by AI:</Text>
+        <View style={styles.centeredWrapper}>
+          <Text style={styles.winnerteam}>{prediction}</Text>
+          <LottieAnimation/>
+        </View>
+      </View>
+      <Text style={styles.analysis}>{analysis}</Text>
     </View>
-    <Text style={styles.analysis}>{item.analysis}</Text>
-  </View>
+    </TouchableOpacity>
   );
 };
 
 export default GameItem;
-

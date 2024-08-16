@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { SafeAreaView, ScrollView, Dimensions, ActivityIndicator, Button, View, Text } from 'react-native';
-import Header from '../components/header';
-import GameItem from '../components/GameItem';
-import { styles } from '../styles/GlobalStyles';
-import { fetchData } from '../utils/api';
+import Header from '../../components/header';
+import GameItem from '../../components/GameItem';
+import { styles } from '../../styles/GlobalStyles';
+import { fetchData } from '../../utils/api';
 
 export default function App() {
   const [data, setData] = useState([]);
