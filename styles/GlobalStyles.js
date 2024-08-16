@@ -23,7 +23,9 @@ export const styles = StyleSheet.create({
   containerAbout: {
     padding: 16,
     maxWidth: 800,
-    margin: 'auto'
+    margin: 'auto',
+    backgroundColor: '#f8f8f8',
+
   },
   grid: {
     flexDirection: 'row',

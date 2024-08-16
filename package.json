@@ -12,6 +12,7 @@
     "@dotlottie/react-player": "^1.6.19",
     "@expo/vector-icons": "^14.0.2",
     "@react-native-community/datetimepicker": "^8.2.0",
+    "@react-native-picker/picker": "^2.7.7",
     "axios": "^1.7.2",
     "date-fns": "^3.6.0",
     "expo": "~51.0.21",
