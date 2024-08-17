@@ -5,6 +5,8 @@ import { styles as globalStyles } from '../styles/GlobalStyles'; // Renomeando p
 import { parseISO, isPast } from 'date-fns';
 import { styles } from '../styles/GameItem';
 import LottieAnimation from './LottieAnimation';
+import { useLanguage } from './globalize/context'; // Ajuste o caminho conforme necessário
+
 
 // Função auxiliar para verificar se a data já passou
 const isDatePast = (dateString) => {
@@ -13,6 +15,7 @@ const isDatePast = (dateString) => {
 };
 
 const GameItem = ({ item, numColumns }) => {
+  const { translate } = useLanguage();
   const router = useRouter();
 
   const homeTeam = item.home_team_name;
@@ -34,13 +37,13 @@ const GameItem = ({ item, numColumns }) => {
     <TouchableOpacity onPress={() => handlePressTeam(item)}>
     <View style={[styles.gameContainer, { flexBasis: `${100 / numColumns}%` }]}>
       <Text style={globalStyles.title}>{homeTeam} vs {awayTeam}</Text>
-      
+
       <View style={styles.dateContainer}>
         <Text style={styles.date}>{date}</Text>
         <Text style={styles.time}>{time}</Text>
       </View>
       <View style={styles.gameColumn}>
-        <Text style={styles.winner}>Forecasted by AI:</Text>
+      <Text style={styles.winner}>{translate('byAI')}</Text>
         <View style={styles.centeredWrapper}>
           <Text style={styles.winnerteam}>{prediction}</Text>
           <LottieAnimation/>
