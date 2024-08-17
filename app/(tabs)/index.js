@@ -57,6 +57,27 @@ export default function App() {
     return selectedTeam ? item.game.toLowerCase().includes(selectedTeam.toLowerCase()) : true;
   }));
 
+  if (loading) {
+    return (
+      <SafeAreaView style={styles.safeArea}>
+        <View style={styles.container}>
+          <ActivityIndicator size="large" color="#0000ff" />
+        </View>
+      </SafeAreaView>
+    );
+  }
+
+  if (error) {
+    return (
+      <SafeAreaView style={styles.safeArea}>
+        <View style={styles.container}>
+          <Text>Error fetching data: {error.message}</Text>
+          <Button title="Retry" onPress={() => fetchData(setLoading, setError, setData)} />
+        </View>
+      </SafeAreaView>
+    );
+  }
+
   return (
     <SafeAreaView style={styles.safeArea}>
       <View style={styles.containerheader}>
