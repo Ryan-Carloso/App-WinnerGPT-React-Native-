@@ -1,3 +1,4 @@
+// index.js
 import React, { useEffect, useState } from 'react';
 import { SafeAreaView, ScrollView, Dimensions, ActivityIndicator, Button, View, Text } from 'react-native';
 import Header from '../../components/header';
@@ -12,9 +13,10 @@ export default function App() {
   const [selectedTeam, setSelectedTeam] = useState('');
   const [sortOrder, setSortOrder] = useState('closest');
   const [numColumns, setNumColumns] = useState(1);
+  const [selectedLeague, setSelectedLeague] = useState('all'); // Default to "all"
 
   useEffect(() => {
-    fetchData(setLoading, setError, setData);
+    fetchLeagueData(selectedLeague);
     adjustColumns();
 
     // Subscribe to dimension changes
@@ -24,7 +26,29 @@ export default function App() {
     return () => {
       subscription?.remove(); // Use the remove method on the subscription object
     };
-  }, []);
+  }, [selectedLeague]);
+
+  const fetchLeagueData = async (league) => {
+    const urlMap = {
+      premierleague: 'https://api-winner-gpt.vercel.app/premierleague/data',
+      championsleague: 'https://api-winner-gpt.vercel.app/championsleague/data',
+      ligaportugal: 'https://api-winner-gpt.vercel.app/ligaportugal/data',
+    };
+    if (league === 'all') {
+      // Fetch data from all leagues and combine them
+      const allData = [];
+      for (const key in urlMap) {
+        const url = urlMap[key];
+        await fetchData(url, setLoading, setError, (data) => allData.push(...data));
+      }
+      setData(allData);
+    } else {
+      const url = urlMap[league];
+      if (url) {
+        await fetchData(url, setLoading, setError, setData);
+      }
+    }
+  };
 
   const adjustColumns = () => {
     const { width } = Dimensions.get('window');
@@ -72,7 +96,7 @@ export default function App() {
       <SafeAreaView style={styles.safeArea}>
         <View style={styles.container}>
           <Text>Error fetching data: {error.message}</Text>
-          <Button title="Retry" onPress={() => fetchData(setLoading, setError, setData)} />
+          <Button title="Retry" onPress={() => fetchLeagueData(selectedLeague)} />
         </View>
       </SafeAreaView>
     );
@@ -86,6 +110,8 @@ export default function App() {
           setSelectedTeam={setSelectedTeam}
           sortOrder={sortOrder}
           setSortOrder={setSortOrder}
+          selectedLeague={selectedLeague}
+          setSelectedLeague={setSelectedLeague} // Pass these props to Header
         />
       </View>
       <ScrollView contentContainerStyle={styles.grid}>
