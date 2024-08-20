@@ -126,6 +126,7 @@ const styles = StyleSheet.create({
     padding: 10,
     borderBottomColor: '#999999',
     borderBottomWidth: 1,
+    fontSize: fontSizeBase,
   },
   topBar: {
     flexDirection: 'column',
