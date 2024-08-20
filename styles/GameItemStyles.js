@@ -82,7 +82,7 @@ export const styles = StyleSheet.create({
     padding: 10,
     marginBottom: 20,
     flexGrow: 1,
-    marginHorizontal: 5,
+    margin: 10,
     width: itemWidth, // Largura do item baseada no número de colunas
     alignSelf: 'center',
     justifyContent: 'center', // Centraliza o conteúdo dentro do quadrado
