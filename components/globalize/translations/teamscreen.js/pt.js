@@ -1,4 +1,5 @@
 export default {
+    AIForecast: 'Previsão de IA',
     teamNotFound: "Time ou jogo não encontrado",
     teamsText: "Análise das Equipes",
     analysis: "Análise:",

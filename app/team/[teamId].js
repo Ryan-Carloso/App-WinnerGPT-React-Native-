@@ -36,7 +36,7 @@ export default function TeamDetail() {
       <View style={styles.header}>
         <Text style={styles.title}>{game.home_team_name} vs {game.away_team_name}</Text>
         <Text style={styles.date}>{new Date(game.fixture_date).toLocaleString()}</Text>
-        <Text style={styles.prediction}>IA Previsão: {game.gpt_prediction}</Text>
+        <Text style={styles.prediction}>{translate('IAforecast')}: {game.gpt_prediction}</Text>
       </View>
       <View style={styles.section}>
         <Text style={styles.subTitle}>{translate('analysis')}</Text>
